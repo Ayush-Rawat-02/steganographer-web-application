@@ -104,12 +104,12 @@ def hideImage():
     resized_secret = resize(secretImage)
     img = getImgArray(resized_img)
     secret = getImgArray(resized_secret)
-    staganographedImage = mergePixels(img,secret)
-    staganographedImage.save("StagnanographedImage.png")
+    steganographedImage = mergePixels(img,secret)
+    steganographedImage.save("SteganographedImage.png")
 
 def decipherSercet():
-    image = cv2.imread("./StagnanographedImage.png")
-    # image = cv2.imread("./Staganographed-24.jpg")
+    image = cv2.imread("./SteganographedImage.png")
+    # image = cv2.imread("./Steganographed-24.jpg")
     img = getImgArray(image)
     secretImage = revealSecret(img)
     secretImage.save("RevealedSecret.png")
@@ -147,7 +147,7 @@ def decipherSercet():
 #     orgimage = cv2.imread("./24.jpg")
 #     resized_img = resize(orgimage)
 #     org = getImgArray(resized_img)
-#     image = cv2.imread("./StagnanographedImage.png")
+#     image = cv2.imread("./SteganographedImage.png")
 #     img = getImgArray(image)
 #     compare(org,img)
 

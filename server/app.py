@@ -1,4 +1,4 @@
-import staganographer
+import steganographer
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
 
@@ -8,30 +8,25 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 #test route
 @app.route('/', methods=['GET'])
 def index():
-    # response = jsonify({'message': 'Welcome to toonIt!'})
-    # response.headers.add('Access-Control-Allow-Origin','*')
-    # return response
     return "WELCOME TO STAGANOGRAPHER"
-#cartoonify route
-@app.route('/staganographer/cipher', methods=['POST'])
-def cartoonify():
+
+@app.route('/steganographer/cipher', methods=['POST'])
+def steganograph():
     print(request.files['cover'].filename)
     print(request.files['secret'].filename)
     cover = request.files['cover']
     secret = request.files['secret']
-    return staganographer.cipherImage(cover,secret)
+    return steganographer.cipherImage(cover,secret)
 
-@app.route('/staganographer/decipher', methods=['POST'])
+@app.route('/steganographer/decipher', methods=['POST'])
 def reveal():
     print(request.files['file'].filename)
     file = request.files['file']
-    # return send_file( cartoonifier.cartoonifyIt(file), mimetype='image/gif')
-    return staganographer.decipherSecret(file)
+    return steganographer.decipherSecret(file)
 
 @app.route('/steganographer/image', methods=['GET'])
 def getImage():
-    return send_file( request.args.get('name'), mimetype='image/gif')
-    # return send_file( 'CartoonifiedNew.jpg', mimetype='image/gif')
+    return send_file( request.args.get('name'), mimetype='image/png')
         
 
 if(__name__=='__main__'):

@@ -74,14 +74,16 @@ def cipherImage(coverImage, secretImage):
     resized_secret = resize(tempSecret)
     img = getImgArray(resized_img)
     secret = getImgArray(resized_secret)
-    staganographedImage = mergePixels(img,secret)
-    staganographedImage.save("Temp-SteganographedImage.png")
-    return "Temp-SteganographedImage.png"
+    steganographedImage = mergePixels(img,secret)
+    originalName = (coverImage.filename.split("."))[0]
+    steganographedImage.save("Steganographed-"+originalName+".png")
+    return "Steganographed-"+originalName+".png"
 
-def decipherSecret(staganographedImage):
-    saveTempImage(staganographedImage)
-    tempStaganographed = cv2.imread("./Temp-"+staganographedImage.filename)
-    img = getImgArray(tempStaganographed)
+def decipherSecret(steganographedImage):
+    saveTempImage(steganographedImage)
+    tempSteganographed = cv2.imread("./Temp-"+steganographedImage.filename)
+    img = getImgArray(tempSteganographed)
     secretImage = revealSecret(img)
-    secretImage.save("Revealed-"+staganographedImage.filename)
-    return "Revealed-"+staganographedImage.filename
+    originalName = (steganographedImage.filename.split("."))[0]
+    secretImage.save("Revealed-"+originalName+".png")
+    return "Revealed-"+originalName+".png"
