@@ -109,10 +109,11 @@ def hideImage():
 
 def decipherSercet():
     image = cv2.imread("./StagnanographedImage.png")
-    # image = cv2.imread("./StagnanographedImage.jpg")
+    # image = cv2.imread("./Staganographed-24.jpg")
     img = getImgArray(image)
     secretImage = revealSecret(img)
     secretImage.save("RevealedSecret.png")
+    # secretImage.save("RevealedSecret.jpg")
 
 # def compare(org,img):
 #     heightIMG,widthIMG,_ = img.shape
@@ -151,6 +152,6 @@ def decipherSercet():
 #     compare(org,img)
 
 # hideText()
-hideImage()
-# decipherSercet()
+# hideImage()
+decipherSercet()
 # matchMSB()

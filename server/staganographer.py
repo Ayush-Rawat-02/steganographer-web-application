@@ -13,7 +13,6 @@ def saveTempImage(image):
 def getImgArray(image):
     if image is None:
 	    sys.exit("Could not read image")
-    # return np.asarray(Image.open(image))
     return np.asarray(image)
 
 def resize(img):
@@ -21,7 +20,6 @@ def resize(img):
     aspect_ratio = width/height
     newHeight = min(height,512)
     newWidth = int(newHeight * aspect_ratio)
-    # print(newHeight, newWidth)
     return cv2.resize(img, (newWidth,newHeight))
 
 def mergePixels(img,secret):
@@ -49,10 +47,7 @@ def mergePixels(img,secret):
             greenPX = greenMSB*16 + greenLSB
             bluePX = blueMSB*16 + blueLSB
             thisRow[x] = [redPX, greenPX, bluePX]
-            # thisRow[x] = [redLSB*16,greenLSB*16,blueLSB*16]
-            # thisRow[x] = [redMSB*16,greenMSB*16,blueMSB*16]
         pixels[y] = thisRow
-        # print(thisRow)
     return Image.fromarray(pixels)
 
 def revealSecret(img):
@@ -67,9 +62,7 @@ def revealSecret(img):
             greenPX = int(curPixel[1]%16)
             bluePX = int(curPixel[0]%16)
             thisRow[x] = [redPX*16, greenPX*16, bluePX*16]
-            # thisRow[x] = [redPX, greenPX, bluePX]
         pixels[y] = thisRow
-        # print(thisRow)
     return Image.fromarray(pixels)
 
 def cipherImage(coverImage, secretImage):
@@ -82,15 +75,13 @@ def cipherImage(coverImage, secretImage):
     img = getImgArray(resized_img)
     secret = getImgArray(resized_secret)
     staganographedImage = mergePixels(img,secret)
-    # staganographedImage.save("StagnanographedImage.png")
-    staganographedImage.save("Staganographed-"+coverImage.filename)
-    return "Staganographed-"+coverImage.filename
+    staganographedImage.save("Temp-StagnanographedImage.png")
+    return "Temp-StaganographedImage.png"
 
 def decipherSecret(staganographedImage):
     saveTempImage(staganographedImage)
     tempStaganographed = cv2.imread("./Temp-"+staganographedImage.filename)
     img = getImgArray(tempStaganographed)
     secretImage = revealSecret(img)
-    # secretImage.save("RevealedSecret.png")
     secretImage.save("Revealed-"+staganographedImage.filename)
     return "Revealed-"+staganographedImage.filename
