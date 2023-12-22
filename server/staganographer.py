@@ -75,8 +75,8 @@ def cipherImage(coverImage, secretImage):
     img = getImgArray(resized_img)
     secret = getImgArray(resized_secret)
     staganographedImage = mergePixels(img,secret)
-    staganographedImage.save("Temp-StagnanographedImage.png")
-    return "Temp-StaganographedImage.png"
+    staganographedImage.save("Temp-SteganographedImage.png")
+    return "Temp-SteganographedImage.png"
 
 def decipherSecret(staganographedImage):
     saveTempImage(staganographedImage)

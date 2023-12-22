@@ -28,7 +28,7 @@ def reveal():
     # return send_file( cartoonifier.cartoonifyIt(file), mimetype='image/gif')
     return staganographer.decipherSecret(file)
 
-@app.route('/staganographer/image', methods=['GET'])
+@app.route('/steganographer/image', methods=['GET'])
 def getImage():
     return send_file( request.args.get('name'), mimetype='image/gif')
     # return send_file( 'CartoonifiedNew.jpg', mimetype='image/gif')
